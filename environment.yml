@@ -1,0 +1,11 @@
+name: storage-apocalypse
+channels: [conda-forge, bioconda]
+dependencies:
+  - python=3.11
+  - snakemake
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - requests
+  # pin exact versions after first successful run: `conda env export --no-builds`

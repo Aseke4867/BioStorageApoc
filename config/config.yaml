@@ -1,0 +1,7 @@
+# All paths, parameters, prices live here. Every price needs a source URL + retrieval date.
+paths:
+  data: data
+  results: results
+growth:
+  forecast_end_year: 2045      # assumption, change if needed
+prices: {}                     # filled by fetch_prices.py, with source + date

@@ -1,0 +1,6 @@
+data/*
+!data/.gitkeep
+.snakemake/
+__pycache__/
+.ipynb_checkpoints/
+*.fastq* *.bam *.cram *.pod5 *.fast5

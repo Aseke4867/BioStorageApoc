@@ -1,0 +1,8 @@
+configfile: "config/config.yaml"
+include: "rules/growth.smk"
+# include: "rules/compress.smk"     # student B
+# include: "rules/align_check.smk"  # student B
+# include: "rules/tiering.smk"      # student B
+
+rule all:
+    input: rules.growth_all.input if False else []   # replace when first rule exists

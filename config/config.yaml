@@ -4,7 +4,28 @@ paths:
   results: results
 growth:
   forecast_end_year: 2045      # assumption, change if needed
-prices: {}                     # filled by fetch_prices.py, with source + date
+  backtest_years: 5            # hold out the last N years to test each functional form
+  bootstrap: 300               # residual-bootstrap refits for prediction bands
+  fit_from: {genbank: 2012, sra: 2014}   # recent ~10 years; earlier start-up growth (5x/year) would dominate
+prices: {}                     # sequencing and storage price series are inputs above (nhgri_costs, owid_storage)
+
+# Crossover model (task 8): when does keeping a sequenced base cost more than sequencing it?
+crossover:
+  first_year: 2022             # last NHGRI data point
+  last_year: 2060
+  draws: 2000
+  retention_years: 10
+  copies: 3                    # INSDC keeps every run at NCBI, ENA and DDBJ
+  storage_fit_years: [2013, 2023]          # disk-price decline rate (OWID)
+  sequencing_fits:                         # two defensible readings of the NHGRI series
+    ngs_era: [2008, 2022]                  # full second-generation era
+    recent: [2015, 2022]                   # since the HiSeq X / NovaSeq plateau
+  scenarios:                               # bits per stored base come from part B results
+    current: {bits_per_base_from: "sra_archive", tier_saving: 0.0, label: "SRA today (archive bytes/base), S3 Standard"}
+    fastq_gz: {bits_per_base_from: "compress_illumina.tsv:gzip-6", tier_saving: 0.0, label: "FASTQ.gz with qualities"}
+    spring: {bits_per_base_from: "compress_illumina.tsv:spring", tier_saving: 0.0, label: "Spring (lossless)"}
+    spring_bin2: {bits_per_base_from: "binning/compress_illumina_bin2.tsv:spring", tier_saving: 0.0, label: "Spring + 2-level qualities"}
+    spring_bin2_tiered: {bits_per_base_from: "binning/compress_illumina_bin2.tsv:spring", tier_saving_from: "tiering_savings_for_forecast.tsv", label: "Spring + 2-level + tiering"}
 
 # ---------------------------------------------------------------- Student B (tasks 4-7)
 # Large files go to data_dir. Inside WSL keep it on the Linux disk, not under /mnt/c:
@@ -58,6 +79,23 @@ inputs:
     md5: ""
     accession: "AWS Price List API, AmazonS3 us-east-1"
     note: "public cloud storage prices used by the tiering cost model"
+
+  # ---- student A inputs (growth, prices)
+  sra_stats:
+    url: https://trace.ncbi.nlm.nih.gov/Traces/sra/sra_stat.cgi
+    md5: ""
+    accession: "NCBI SRA database growth statistics (daily, bases and bytes)"
+    note: "the series published behind https://www.ncbi.nlm.nih.gov/sra/docs/sragrowth/"
+  nhgri_costs:
+    url: https://www.genome.gov/sites/default/files/media/files/2023-05/Sequencing_Cost_Data_Table_May2022.xls
+    md5: ""
+    accession: "NHGRI DNA Sequencing Costs: Data (May 2022 table)"
+    note: "cost per raw megabase and per human-sized genome, NHGRI-funded centres, 2001-2022"
+  owid_storage:
+    url: "https://ourworldindata.org/grapher/historical-cost-of-computer-memory-and-storage.csv?v=1&csvType=full&useColumnShortNames=true"
+    md5: ""
+    accession: "Our World in Data: historical cost of computer memory and storage (constant 2020 USD per TB)"
+    note: "disk-drive and SSD price per TB by year, compiled by OWID from J. McCallum's price records"
 
 # plasmid reference sequences for the POD5 run (one FASTA per barcode, concatenated)
 plasmid_refs_s3:

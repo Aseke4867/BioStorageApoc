@@ -5,7 +5,7 @@ Both partners worked with an AI coding agent (Claude Code); its use is disclosed
 components listed under his name, and reviewed the other partner's components where they
 connect.
 
-## Student A (Aseke): block 1, tasks 1-3 and 8
+## Student A (Asulkhan): block 1, tasks 1-3 and 8
 - **Led:** project scope and data choices for block 1; the GenBank release-notes parser
   (`fetch_growth_stats.py`), written by hand: table location without fixed line numbers,
   date reconciliation between tables, header cross-checks.
@@ -34,6 +34,6 @@ connect.
   conclusion section.
 
 ## Defence
-Aseke presents the summary, archive growth, platforms and the crossover projection. Ravil
+Asulkhan presents the summary, archive growth, platforms and the crossover projection. Ravil
 presents compression, quality binning, long reads and raw signal, searchability, tiering and a
 `make test` run. Both answer questions on any part.

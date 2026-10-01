@@ -5,3 +5,116 @@ paths:
 growth:
   forecast_end_year: 2045      # assumption, change if needed
 prices: {}                     # filled by fetch_prices.py, with source + date
+
+# ---------------------------------------------------------------- Student B (tasks 4-7)
+# Large files go to data_dir. Inside WSL keep it on the Linux disk, not under /mnt/c:
+#   snakemake --config data_dir=$HOME/biostorage_data
+data_dir: data
+threads: 8
+
+# Every input is real and public. md5 values are ENA's (filereport, retrieved 2026-10-01).
+inputs:
+  # The Illumina reads come from NCBI's 'SRA Normalized' file, which keeps the base qualities.
+  # ENA's FASTQ for the same run is 'SRA Lite': every quality replaced by Q30 ('?'). Both are kept;
+  # the Lite copy is evidence of how much the archive already throws away.
+  illumina_sra:
+    url: https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR25629153/SRR25629153
+    md5: 1497698954e5c38bd87ead45205edba2
+    accession: SRR25629153
+    note: "E. coli K-12 MG1655 'ibuprofen_3', Illumina 2x251 (metadata says HiSeq 4000; flow cell ID HWFV2DRXY is NovaSeq), BioSample SAMN36977599, BioProject PRJNA1005239; SRA Normalized format (md5 from NCBI SRA run record)"
+  illumina_lite_R1:
+    url: https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR256/053/SRR25629153/SRR25629153_1.fastq.gz
+    md5: 1fcac7483fb51153f50d88d2f7bee2d1
+    accession: SRR25629153
+    note: "ENA FASTQ of the same run (SRA Lite: constant Q30 qualities)"
+  illumina_lite_R2:
+    url: https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR256/053/SRR25629153/SRR25629153_2.fastq.gz
+    md5: 4a74bc72091bec72cd41159eb0681ccb
+    accession: SRR25629153
+    note: "mate 2 of the ENA FASTQ above"
+  ont:
+    url: https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR256/022/SRR25637822/SRR25637822_1.fastq.gz
+    md5: 95b91d4734f39bde1f4bed9fc345c090
+    accession: SRR25637822
+    note: "same BioSample SAMN36977599, Oxford Nanopore MinION"
+  ref_MG1655:
+    url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_000913.3&rettype=fasta&retmode=text"
+    md5: ""
+    accession: NC_000913.3
+    note: "E. coli K-12 MG1655 complete genome (RefSeq); reference for the K-12 reads"
+  ref_REL606:
+    url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_012967.1&rettype=fasta&retmode=text"
+    md5: ""
+    accession: NC_012967.1
+    note: "E. coli B REL606 complete genome; divergent reference that gives ~26k known differences"
+  pod5:
+    url: https://ont-open-data.s3.amazonaws.com/plasmid_2025.04/raw/FBC24981_rep2/pod5/FBC24981_f1e239a2_ce156b78_17.pod5
+    md5: ""
+    accession: "ont-open-data plasmid_2025.04 FBC24981_rep2 file 17"
+    note: "raw Nanopore signal (POD5), R10.4.1, rapid barcoding SQK-RBK114-96, plasmids with known sequence"
+
+  aws_s3_prices:
+    url: https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv
+    md5: ""
+    accession: "AWS Price List API, AmazonS3 us-east-1"
+    note: "public cloud storage prices used by the tiering cost model"
+
+# plasmid reference sequences for the POD5 run (one FASTA per barcode, concatenated)
+plasmid_refs_s3:
+  bucket: https://ont-open-data.s3.amazonaws.com
+  prefix: plasmid_2025.04/analysis/inputs/references/full_reference/
+
+# S3 prefixes whose total size gives the archive-scale raw-signal vs basecall ratio
+archive_size_prefixes:
+  plasmid_raw_pod5: plasmid_2025.04/raw/
+  plasmid_basecalls_hac: plasmid_2025.04/basecalls/hac/
+  plasmid_basecalls_sup: plasmid_2025.04/basecalls/sup/
+  pathogen_raw_pod5: pathogen_surveillance_2025.09/raw/
+  pathogen_basecalls_fastq: pathogen_surveillance_2025.09/basecalls/
+
+# short-read QC (fastp). Thresholds are justified in report section 4.
+fastp:
+  qualified_quality: 15        # a base below Q15 (3% error) counts as low quality
+  unqualified_percent: 40      # drop a read if >40% of its bases are low quality
+  length_required: 50          # shorter fragments map ambiguously in a 4.6 Mb genome
+  cut_tail_quality: 20         # trim the decaying 3' end of HiSeq 4000 reads
+
+# long-read QC
+ont_filter:
+  min_length: 1000
+  min_mean_q: 10
+
+binning_schemes: [orig, illumina8, bin4, bin2, noqual]
+depths_illumina: [5, 15, 30, full]
+depths_ont: [15, 30, full]
+genome_size: 4641652
+seed: 11
+
+# query used for the search-latency benchmark (task 6)
+search:
+  gene_name: lacZ
+  gene_region: "NC_000913.3:363231-366305"
+  random_regions: 200
+  region_len: 1000
+
+dorado:
+  bin: ~/tools/dorado-1.4.0-linux-x64/bin/dorado
+  models: [hac, sup]
+  max_reads: 20000            # GPU time budget; reads are sampled from the POD5 file
+  device: "cuda:0"
+
+# Tiering (task 7). Prices: AWS S3 us-east-1 machine-readable price list (input aws_s3_prices,
+# publication 2026-09-28, retrieved 2026-10-01). tiering_model.py re-reads that CSV and stops if a
+# number below no longer matches it. Deep Archive storage = the identical Intelligent-Tiering
+# Deep Archive Access rate (the plain Deep Archive row is not in this file); retrieval = bulk.
+tiering:
+  query: "tax_tree(562)"
+  public_from: "2010-01-01"
+  public_to: "2021-12-31"
+  train_until_year: 2017
+  horizon_months: 60
+  tiers:
+    hot:  {name: "S3 Standard",              usd_gb_month: 0.023,   usd_gb_retrieval: 0.0,    min_months: 0}
+    warm: {name: "S3 Glacier Instant Retr.", usd_gb_month: 0.004,   usd_gb_retrieval: 0.03,   min_months: 3}
+    cold: {name: "S3 Glacier Deep Archive",  usd_gb_month: 0.00099, usd_gb_retrieval: 0.0025, min_months: 6}
+  egress_usd_gb: 0.09         # data transfer out to internet, paid in every tier; reported, not optimised

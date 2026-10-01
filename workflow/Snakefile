@@ -1,8 +1,48 @@
 configfile: "config/config.yaml"
-include: "rules/growth.smk"
-# include: "rules/compress.smk"     # student B
-# include: "rules/align_check.smk"  # student B
-# include: "rules/tiering.smk"      # student B
+
+include: "rules/growth.smk"        # student A
+include: "rules/data.smk"          # student B: inputs, references, truth set
+include: "rules/compress.smk"      # student B: QC, compression benchmark, quality binning
+include: "rules/align_check.smk"   # student B: alignment, variant benchmark, search latency
+include: "rules/signal.smk"        # student B: raw signal (POD5) and re-basecalling
+include: "rules/tiering.smk"       # student B: reuse prediction and tiering cost
+
+wildcard_constraints:
+    plat="illumina|ont",
+    mate="R1|R2|SE",
+    ref="MG1655|REL606",
+    model="hac|sup|fast",
+
+SIGNAL = [f"{RES}/tables/pod5_stats.tsv", f"{RES}/tables/pod5_recompress.tsv", f"{RES}/tables/ont_archive_sizes.tsv"]
+if config["dorado"].get("enabled", True):
+    SIGNAL.append(f"{RES}/tables/signal_vs_basecalls.tsv")
+
+STUDENT_B = [
+    f"{RES}/tables/downloads_student_b.tsv",
+    f"{RES}/tables/truth_summary.tsv",
+    f"{RES}/tables/read_stats.tsv",
+    f"{RES}/qc/nanoplot_ont/NanoStats.txt",
+    expand(f"{RES}/tables/compress_{{p}}.tsv", p=["illumina", "ont"]),
+    expand(f"{RES}/tables/qual_profile_{{p}}.tsv", p=["illumina", "ont"]),
+    [f"{RES}/tables/compress_illumina_lite.tsv"] if "illumina_lite_R1" in INPUT_FILES else [],
+    expand(f"{RES}/tables/binning/compress_illumina_{{s}}.tsv", s=config["binning_schemes"]),
+    expand(f"{RES}/tables/binning/compress_ont_{{s}}.tsv", s=[s for s in config["binning_schemes"] if s != "illumina8"]),
+    f"{RES}/tables/variant_benchmark.tsv",
+    expand(f"{RES}/tables/error_profile_{{p}}.tsv", p=["illumina", "ont"]),
+    expand(f"{RES}/tables/flagstat_{{p}}.tsv", p=["illumina", "ont"]),
+    expand(f"{RES}/tables/aligned_formats_{{p}}.tsv", p=["illumina", "ont"]),
+    f"{RES}/tables/search_latency.tsv",
+    SIGNAL,
+    f"{RES}/tables/tiering_costs.tsv",
+    f"{RES}/tables/tiering_metadata_issues.tsv",
+]
+
 
 rule all:
-    input: rules.growth_all.input if False else []   # replace when first rule exists
+    input: STUDENT_B, f"{RES}/figures/.done_student_b", f"{RES}/tables/.genbank_growth.done"
+
+
+rule student_b_figures:
+    input: STUDENT_B
+    output: touch(f"{RES}/figures/.done_student_b")
+    shell: "python workflow/scripts/figures_b.py --tables {RES}/tables --figures {RES}/figures --data-dir {D}"

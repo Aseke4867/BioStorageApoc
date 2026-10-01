@@ -1,0 +1,16 @@
+platform	instrument	launch_year	max_output_gb_per_run	run_time_h	read_length	source	gb_per_day
+Illumina	Genome Analyzer	2006	1.0	72	1x35	https://www.illumina.com/documents/products/datasheets/datasheet_genome_analyzer.pdf	0.3333333333333333
+Illumina	Genome Analyzer IIx	2009	95.0	336	2x150	https://www.illumina.com/documents/products/datasheets/datasheet_genome_analyzeriix.pdf	6.785714285714286
+Illumina	HiSeq 2000	2010	600.0	264	2x100	https://www.illumina.com/documents/products/datasheets/datasheet_hiseq2000.pdf	54.54545454545455
+Illumina	HiSeq 2500	2012	1000.0	144	2x125	https://www.illumina.com/documents/products/datasheets/datasheet_hiseq2500.pdf	166.66666666666666
+Illumina	HiSeq X	2014	1800.0	72	2x150	https://www.illumina.com/documents/products/datasheets/datasheet-hiseq-x-ten.pdf	600.0
+Illumina	HiSeq 4000	2015	1500.0	84	2x150	https://www.illumina.com/documents/products/datasheets/datasheet-hiseq-3000-4000.pdf	428.57142857142856
+Illumina	NovaSeq 6000	2017	6000.0	44	2x150	https://www.illumina.com/systems/sequencing-platforms/novaseq/specifications.html	3272.727272727273
+Illumina	NovaSeq X Plus	2023	16000.0	48	2x150	https://www.illumina.com/systems/sequencing-platforms/novaseq-x-plus/specifications.html	8000.0
+Roche 454	GS FLX Titanium	2008	0.5	10	1x400	https://www.roche.com (GS FLX Titanium series specifications, archived)	1.2
+Ion Torrent	Ion PGM (318 chip)	2011	2.0	7	1x400	https://www.thermofisher.com/order/catalog/product/4462921	6.857142857142857
+PacBio	Sequel II (HiFi)	2019	30.0	30	HiFi ~15 kb	https://www.pacb.com/products-and-services/sequel-system/	24.0
+PacBio	Revio (HiFi, 4 SMRT Cells)	2023	360.0	24	HiFi ~15-20 kb	https://www.pacb.com/revio/	360.0
+Oxford Nanopore	MinION (1 flow cell)	2015	50.0	72	long (N50 10-100 kb)	https://nanoporetech.com/products/sequence/minion	16.666666666666668
+Oxford Nanopore	GridION (5 flow cells)	2017	250.0	72	long	https://nanoporetech.com/products/sequence/gridion	83.33333333333333
+Oxford Nanopore	PromethION 48	2018	13920.0	72	long	https://nanoporetech.com/products/sequence/promethion	4640.0

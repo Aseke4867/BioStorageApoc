@@ -16,6 +16,9 @@ INPUT_NAMES = {
     "ref_REL606": "ref_REL606.fa",
     "pod5": "signal.pod5",
     "aws_s3_prices": "aws_s3_prices.csv",
+    "sra_stats": "sra_stats.csv",                   # student A inputs
+    "nhgri_costs": "nhgri_costs.xls",
+    "owid_storage": "owid_storage.csv",
 }
 INPUT_FILES = {k: f"{D}/raw/{v}" for k, v in INPUT_NAMES.items() if config["inputs"].get(k)}
 
@@ -66,7 +69,7 @@ rule fetch_plasmid_refs:
 
 rule provenance:
     input: [v for v in INPUT_FILES.values()] + [f"{D}/raw/plasmid_refs.fa"]
-    output: f"{RES}/tables/downloads_student_b.tsv"
+    output: f"{RES}/tables/downloads.tsv"
     params: prov=lambda w, input: " ".join(f"'{p}.prov.tsv'" for p in input)
     shell: "python workflow/scripts/fetch_data.py merge --prov {params.prov} --out {output}"
 

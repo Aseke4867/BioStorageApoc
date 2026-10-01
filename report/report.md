@@ -3,6 +3,8 @@
 *AITU, Introduction to Bioinformatics, Project 09. Every number below comes from a file in
 `results/` that `make repro` regenerates from public data.*
 
+**Repository:** <https://github.com/Aseke4867/BioStorageApoc>
+
 ## Summary
 
 **Question.** Sequencing output has grown faster than storage has become cheaper. When does

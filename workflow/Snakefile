@@ -1,7 +1,7 @@
 configfile: "config/config.yaml"
 
-include: "rules/growth.smk"        # student A
-include: "rules/data.smk"          # student B: inputs, references, truth set
+include: "rules/data.smk"          # inputs (both students), references, truth set
+include: "rules/growth.smk"        # student A: growth, instruments, prices, crossover
 include: "rules/compress.smk"      # student B: QC, compression benchmark, quality binning
 include: "rules/align_check.smk"   # student B: alignment, variant benchmark, search latency
 include: "rules/signal.smk"        # student B: raw signal (POD5) and re-basecalling
@@ -18,7 +18,7 @@ if config["dorado"].get("enabled", True):
     SIGNAL.append(f"{RES}/tables/signal_vs_basecalls.tsv")
 
 STUDENT_B = [
-    f"{RES}/tables/downloads_student_b.tsv",
+    f"{RES}/tables/downloads.tsv",
     f"{RES}/tables/truth_summary.tsv",
     f"{RES}/tables/read_stats.tsv",
     f"{RES}/qc/nanoplot_ont/NanoStats.txt",
@@ -38,8 +38,15 @@ STUDENT_B = [
 ]
 
 
+STUDENT_A = [
+    f"{RES}/tables/growth_fits.tsv", f"{RES}/tables/sra_intake_vs_capacity.tsv",
+    f"{RES}/tables/instruments.tsv", f"{RES}/tables/crossover_summary.tsv",
+    f"{RES}/tables/sra_growth_issues.tsv",
+]
+
+
 rule all:
-    input: STUDENT_B, f"{RES}/figures/.done_student_b", f"{RES}/tables/.genbank_growth.done"
+    input: STUDENT_A, STUDENT_B, f"{RES}/figures/.done_student_a", f"{RES}/figures/.done_student_b"
 
 
 rule student_b_figures:

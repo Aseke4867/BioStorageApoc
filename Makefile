@@ -3,7 +3,7 @@
 DATA  ?= $(HOME)/biostorage_data
 CORES ?= 16
 
-.PHONY: env repro test dry clean-test
+.PHONY: env repro test dry clean-test report
 
 env:
 	mamba env create -f environment.yml
@@ -22,3 +22,7 @@ dry:
 
 clean-test:
 	rm -rf test_run /tmp/storage_apocalypse_test
+
+# Report as PDF (pandoc + XeLaTeX are not in the conda environment; install them separately).
+report:
+	cd report && pandoc report.md -o report.pdf --pdf-engine=xelatex -V geometry:margin=2cm -V fontsize=10pt --resource-path=.

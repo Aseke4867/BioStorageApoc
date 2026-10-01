@@ -18,13 +18,19 @@ Everything runs from public data with one Snakemake workflow. The report is `rep
    ~1.5 h on 16 cores; without a GPU set `dorado: {enabled: false}` in `config/config.yaml`).
 7. Results: tables in `results/tables/`, figures in `results/figures/`, per-step runtime and
    memory in `results/benchmarks/` (Snakemake `benchmark:`), provenance of every download in
-   `results/tables/downloads_student_b.tsv` and `config/accessions.tsv`.
+   `results/tables/downloads.tsv` and `config/accessions.tsv`.
 
-The headline numbers of part B are produced by `make repro`: compression ratio per codec
-(`compress_*.tsv`), cost of quality binning in variant-calling F1 (`variant_benchmark.tsv`),
-signal-vs-basecalls bytes and re-basecalling accuracy gain (`signal_vs_basecalls.tsv`), query
-latency per storage format (`search_latency.tsv`), and the tiering saving
-(`tiering_costs.tsv`, `tiering_savings_for_forecast.tsv`).
+**Headline result** (`results/tables/crossover_summary.tsv`, report §8): for the SRA as it
+stores data today (0.34 bytes/base, 3 INSDC copies, cloud list price), keeping a newly sequenced
+megabase for 10 years costs about as much as sequencing it; the curves cross in 2023 (median,
+90% range 2022-2036). Lossless FASTQ compression, quality binning and reuse-based tiering, all
+measured here, move the crossover to about 2035.
+
+Other key tables: archive growth models (`growth_fits.tsv`), instrument capacity
+(`instruments.tsv`), price trends (`price_fits.tsv`), compression per codec (`compress_*.tsv`),
+cost of quality binning (`variant_benchmark.tsv`), signal vs basecalls (`signal_vs_basecalls.tsv`),
+query latency (`search_latency.tsv`), tiering (`tiering_costs.tsv`).
+The report as PDF: `report/report.pdf` (`make report`, needs pandoc and XeLaTeX).
 
 ## Data (all public; accessions and checksums in `config/config.yaml`)
 
@@ -38,7 +44,12 @@ latency per storage format (`search_latency.tsv`), and the tiering saving
 | Run metadata, all E. coli runs | ENA Portal API `read_run`, `tax_tree(562)` (~607k runs) | tiering features |
 | Literature mentions of each study | Europe PMC REST (`ACCESSION_ID` + free text) | reuse signal for tiering |
 | Cloud storage prices | AWS Price List API, AmazonS3 us-east-1 | tiering cost model |
-| GenBank release statistics | `ftp.ncbi.nlm.nih.gov/genbank/gbrel.txt` | growth model (student A) |
+| GenBank release statistics | `ftp.ncbi.nlm.nih.gov/genbank/gbrel.txt` (release 273.0) | archive growth |
+| SRA database size, daily | `trace.ncbi.nlm.nih.gov/Traces/sra/sra_stat.cgi` | archive growth, bytes per stored base |
+| Sequencing cost per Mb | NHGRI *DNA Sequencing Costs: Data* (May 2022 table) | crossover projection |
+| Disk price per TB, 1956-2023 | Our World in Data (constant 2020 USD) | storage price trend |
+| Instrument output per run | vendor specification sheets, `config/instruments.tsv` (URLs per row) | capacity by generation |
+| Public runs per platform and year | ENA Portal API `/count` | platform mix |
 
 ## Layout
 

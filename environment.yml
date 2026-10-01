@@ -32,6 +32,7 @@ dependencies:
   - seqkit=2.14.0
   - sra-tools=3.4.1
   - make=4.4.1
+  - xlrd=2.0.2
   - pip
   - pip:
       - pod5==0.3.48

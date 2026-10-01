@@ -1,0 +1,5 @@
+# Pipeline outputs (QC reports, tables, figures) are generated, not written by hand:
+# keep them out of GitHub's language statistics and collapse them in diffs.
+results/** linguist-generated
+test_data/** linguist-generated
+report/report.pdf linguist-generated

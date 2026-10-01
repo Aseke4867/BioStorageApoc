@@ -1,0 +1,59 @@
+# Small real-data test run (`make test`): every step of the pipeline, ~5 minutes, no GPU, no network.
+# Loaded on top of config.yaml: snakemake --configfile config/config.yaml config/test.yaml
+# test_data/ holds slices of the same real inputs (see README, "Test dataset").
+data_dir: /tmp/storage_apocalypse_test   # outside the repo: BLAST cannot open a database whose path has a space
+results_dir: test_run/results
+threads: 4
+
+inputs:
+  illumina_sra: null          # the main run dumps FASTQ from the SRA file; the test gives FASTQ directly
+  illumina_lite_R1: null
+  illumina_lite_R2: null
+  illumina_R1: {url: "local:test_data/illumina_R1.fastq.gz", md5: "", accession: SRR25629153, note: "first 20,000 read pairs"}
+  illumina_R2: {url: "local:test_data/illumina_R2.fastq.gz", md5: "", accession: SRR25629153, note: "first 20,000 read pairs"}
+  ont: {url: "local:test_data/ont.fastq.gz", md5: "", accession: SRR25637822, note: "first 150 reads >=1 kb"}
+  ref_MG1655: {url: "local:test_data/ref_MG1655.fa.gz", md5: "", accession: NC_000913.3, note: "full genome"}
+  ref_REL606: {url: "local:test_data/ref_REL606.fa.gz", md5: "", accession: NC_012967.1, note: "full genome"}
+  pod5: {url: "local:test_data/signal.pod5", md5: "", accession: "ont-open-data plasmid_2025.04 FBC24981_rep2 file 17", note: "3 reads"}
+  aws_s3_prices: {url: "local:test_data/aws_s3_prices.csv.gz", md5: "", accession: "AWS Price List API, AmazonS3 us-east-1", note: "snapshot 2026-10-01"}
+
+plasmid_refs_s3:
+  bucket: https://ont-open-data.s3.amazonaws.com
+  prefix: plasmid_2025.04/analysis/inputs/references/full_reference/
+  local: test_data/plasmid_refs.fa.gz
+
+archive_size_prefixes: {}
+
+depths_illumina: [full]
+depths_ont: [full]
+
+dorado:
+  enabled: false
+  bin: ~/tools/dorado-1.4.0-linux-x64/bin/dorado
+  models: [hac, sup]
+  max_reads: 3
+  device: "cpu"
+
+search:
+  gene_name: lacZ
+  gene_region: "NC_000913.3:363231-366305"
+  random_regions: 10
+  region_len: 1000
+
+growth:
+  forecast_end_year: 2045
+  gbrel_local: test_data/gbrel_273.0.txt
+  accessions: test_run/accessions_growth.tsv
+
+tiering:
+  query: "tax_tree(562)"
+  public_from: "2010-01-01"
+  public_to: "2021-12-31"
+  train_until_year: 2017
+  horizon_months: 60
+  fetch_extra: "--runs-tsv test_data/tiering_runs.tsv.gz --seed-cache test_data/tiering_epmc_cache.jsonl"
+  tiers:
+    hot:  {name: "S3 Standard",              usd_gb_month: 0.023,   usd_gb_retrieval: 0.0,    min_months: 0}
+    warm: {name: "S3 Glacier Instant Retr.", usd_gb_month: 0.004,   usd_gb_retrieval: 0.03,   min_months: 3}
+    cold: {name: "S3 Glacier Deep Archive",  usd_gb_month: 0.00099, usd_gb_retrieval: 0.0025, min_months: 6}
+  egress_usd_gb: 0.09

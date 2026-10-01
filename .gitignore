@@ -3,4 +3,21 @@ data/*
 .snakemake/
 __pycache__/
 .ipynb_checkpoints/
-*.fastq* *.bam *.cram *.pod5 *.fast5
+test_run/
+# raw / intermediate sequencing data never goes to git (one pattern per line)
+*.fastq
+*.fastq.gz
+*.fq.gz
+*.bam
+*.bai
+*.cram
+*.crai
+*.pod5
+*.fast5
+*.sra
+*.spring
+*.zst
+# ...except the small real-data slices used by `make test`
+!test_data/*.fastq.gz
+!test_data/*.pod5
+docs/defence_notes_ru.md

@@ -15,6 +15,9 @@ inputs:
   ref_MG1655: {url: "local:test_data/ref_MG1655.fa.gz", md5: "", accession: NC_000913.3, note: "full genome"}
   ref_REL606: {url: "local:test_data/ref_REL606.fa.gz", md5: "", accession: NC_012967.1, note: "full genome"}
   pod5: {url: "local:test_data/signal.pod5", md5: "", accession: "ont-open-data plasmid_2025.04 FBC24981_rep2 file 17", note: "3 reads"}
+  sra_stats: {url: "local:test_data/sra_stats.csv.gz", md5: "", accession: "NCBI SRA statistics", note: "snapshot 2026-10-01"}
+  nhgri_costs: {url: "local:test_data/nhgri_costs.xls", md5: "", accession: "NHGRI sequencing costs May 2022", note: "snapshot 2026-10-01"}
+  owid_storage: {url: "local:test_data/owid_storage.csv", md5: "", accession: "OWID storage prices", note: "snapshot 2026-10-01"}
   aws_s3_prices: {url: "local:test_data/aws_s3_prices.csv.gz", md5: "", accession: "AWS Price List API, AmazonS3 us-east-1", note: "snapshot 2026-10-01"}
 
 plasmid_refs_s3:
@@ -42,6 +45,10 @@ search:
 
 growth:
   forecast_end_year: 2045
+  backtest_years: 5
+  bootstrap: 50
+  fit_from: {genbank: 2012, sra: 2014}
+  runs_table_local: test_data/platform_runs_by_year.tsv
   gbrel_local: test_data/gbrel_273.0.txt
   accessions: test_run/accessions_growth.tsv
 
@@ -57,3 +64,6 @@ tiering:
     warm: {name: "S3 Glacier Instant Retr.", usd_gb_month: 0.004,   usd_gb_retrieval: 0.03,   min_months: 3}
     cold: {name: "S3 Glacier Deep Archive",  usd_gb_month: 0.00099, usd_gb_retrieval: 0.0025, min_months: 6}
   egress_usd_gb: 0.09
+
+crossover:
+  draws: 200

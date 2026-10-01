@@ -1,0 +1,2 @@
+accession_or_url	source	release	bytes	sha256	download_date	verified_by	note
+https://ftp.ncbi.nlm.nih.gov/genbank/gbrel.txt	NCBI GenBank release notes	273.0	1235842	9e26f1821a1846aba58d9b8bee167e89355c0711995cd2f21b716a6123e5bda0	2026-09-30	<Asulkhan>	4 tables, 516 rows; parsed CSV committed to git

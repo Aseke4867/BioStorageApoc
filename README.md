@@ -4,7 +4,10 @@ Sequencing output has grown faster than storage got cheaper. This repository mod
 curves cross (growth, prices, forecast — student A) and measures what compression, quality-score
 binning, raw-signal policy and storage tiering can buy (tasks 4–7 — student B).
 
-Everything runs from public data with one Snakemake workflow. The report is `report/report.md`.
+Everything runs from public data with one Snakemake workflow. The report is `report/report.md`
+(PDF: `report/report.pdf`), the defence slides `report/presentation.pptx`.
+
+Repository: <https://github.com/Aseke4867/BioStorageApoc>
 
 ## Quick start (under ten steps)
 

@@ -1,0 +1,2 @@
+service	usd_per_gb_month	effective_date	price_list_row
+AWS S3 Standard, us-east-1, first 50 TB	0.023	2026-09-01	$0.023 per GB - first 50 TB / month of storage used

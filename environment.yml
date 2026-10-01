@@ -1,11 +1,37 @@
+# Pinned to the versions the results were produced with (2026-10-01, Ubuntu on WSL2, x86_64).
+# Full transitive lock: environment.lock.yml (conda env export --no-builds).
+# Dorado (GPU basecaller) is not on conda: workflow/scripts/install_dorado.sh
 name: storage-apocalypse
 channels: [conda-forge, bioconda]
 dependencies:
-  - python=3.11
-  - snakemake
-  - pandas
-  - numpy
-  - scipy
-  - matplotlib
-  - requests
-  # pin exact versions after first successful run: `conda env export --no-builds`
+  - python=3.11.16
+  - snakemake-minimal=9.27.0
+  - pandas=3.0.6
+  - numpy=2.4.6
+  - scipy=1.17.1
+  - matplotlib=3.11.2
+  - requests=2.34.2
+  - pyarrow=22.0.0
+  - pyyaml=6.0.3
+  - scikit-learn=1.9.1
+  - fastp=1.3.7
+  - fastqc=0.12.1
+  - nanoplot=1.48.0
+  - bwa-mem2=2.3
+  - minimap2=2.31
+  - k8=1.2
+  - samtools=1.24
+  - bcftools=1.24
+  - htslib=1.24
+  - spring=1.1.1
+  - zstd=1.5.7
+  - xz=5.8.3
+  - bzip2=1.0.8
+  - pigz=2.8
+  - blast=2.17.0
+  - seqkit=2.14.0
+  - sra-tools=3.4.1
+  - make=4.4.1
+  - pip
+  - pip:
+      - pod5==0.3.48

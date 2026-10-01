@@ -1,0 +1,7 @@
+policy	storage_usd	retrieval_usd	total_usd	reuse_events	delayed_events	delayed_share	savings_vs_hot_pct	test_tb	horizon_months	savings_vs_warm_pct
+all hot (S3 Standard)	103394.6465	0.0	103394.6465	503	0	0.0	0.0	74.9237	60	-440.4564
+all warm (Glacier Instant Retrieval)	17981.6776	1149.3115	19130.9891	503	0	0.0	81.4971	74.9237	60	0.0
+all cold (Deep Archive)	4450.4652	95.776	4546.2412	503	503	1.0	95.603	74.9237	60	76.2362
+age rule: hot 24 months, then Deep Archive	44028.1377	77.8252	44105.9629	503	368	0.7316	57.3421	74.9237	60	-130.5472
+model (logistic): Deep Archive if p<thr, else Instant Retrieval	15958.5185	1134.9967	17093.5152	503	85	0.169	83.4677	74.9237	60	10.6501
+oracle: Deep Archive if never reused, else Instant Retrieval	7297.0806	1149.3115	8446.3921	503	0	0.0	91.8309	74.9237	60	55.8497

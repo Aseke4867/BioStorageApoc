@@ -1,0 +1,6 @@
+issue	count	unit	share
+no study_accession	261	runs	0.00043
+no first_public date	0	runs	0.0
+no byte size (neither fastq nor submitted)	2638	runs	0.00434
+base_count = 0 (no reads extracted, e.g. native ONT/PacBio upload)	3751	runs	0.00618
+studies outside the date window (not labelled)	4127	studies	0.41792

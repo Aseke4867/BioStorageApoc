@@ -1,0 +1,9 @@
+file	format	type	num_seqs	sum_len	min_len	avg_len	max_len	Q1	Q2	Q3	sum_gap	N50	N50_num	Q20(%)	Q30(%)	AvgQual	GC(%)	sum_n
+/home/ravse/biostorage_data/raw/illumina_R1.fastq.gz	FASTQ	DNA	832053	203040297	36	244.0	251	251	251	251	0	251	404463	97	91	25.66	49.38	462
+/home/ravse/biostorage_data/raw/illumina_R2.fastq.gz	FASTQ	DNA	832053	196660643	36	236.4	251	251	251	251	0	251	391755	96	90	24.76	49.71	2205
+/home/ravse/biostorage_data/raw/ont.fastq.gz	FASTQ	DNA	41926	587231892	5063	14006.4	87567	8670	11551	16597	0	15234	12599	74	47	15.29	50.95	0
+/home/ravse/biostorage_data/raw/illumina_lite_R1.fastq.gz	FASTQ	DNA	832053	203040297	36	244.0	251	251	251	251	0	251	404463	100	100	30.00	49.38	462
+/home/ravse/biostorage_data/raw/illumina_lite_R2.fastq.gz	FASTQ	DNA	832053	196660643	36	236.4	251	251	251	251	0	251	391755	100	100	30.00	49.71	2205
+/home/ravse/biostorage_data/qc/illumina_R1.fastq	FASTQ	DNA	780354	190819031	50	244.5	251	251	251	251	0	251	380118	97	91	25.59	49.34	458
+/home/ravse/biostorage_data/qc/illumina_R2.fastq	FASTQ	DNA	780354	185249902	50	237.4	251	251	251	251	0	251	369024	96	89	24.64	49.68	2182
+/home/ravse/biostorage_data/qc/ont_SE.fastq	FASTQ	DNA	41926	587231892	5063	14006.4	87567	8670	11551	16597	0	15234	12599	74	47	15.29	50.95	0

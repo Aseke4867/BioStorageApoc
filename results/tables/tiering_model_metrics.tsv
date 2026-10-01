@@ -1,0 +1,5 @@
+model	train_studies	test_studies	train_reuse_rate	test_reuse_rate	test_roc_auc	test_pr_auc	test_brier
+logistic	3021	2727	0.0338	0.0898	0.7524	0.2239	0.3685
+gradient_boosting	3021	2727	0.0338	0.0898	0.7086	0.2042	0.1099
+size_only	3021	2727	0.0338	0.0898	0.711	0.2256	0.2623
+random	3021	2727	0.0338	0.0898	0.4931	0.0927	

@@ -1,0 +1,8 @@
+format	bytes	bits_per_base
+fastq.gz (as archived)	206502575	4.1331
+fastq.zst (-19)	140968758	2.8215
+spring	40007680	0.8008
+BAM	105001057	2.1016
+CRAM 3.1	36693435	0.7344
+CRAM 3.1 archive	34877851	0.6981
+BLAST db	363931541	7.2841

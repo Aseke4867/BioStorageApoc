@@ -1,0 +1,6 @@
+dataset	prefix	objects	bytes
+plasmid_raw_pod5	plasmid_2025.04/raw/	134	272499569192
+plasmid_basecalls_hac	plasmid_2025.04/basecalls/hac/	388	47891387805
+plasmid_basecalls_sup	plasmid_2025.04/basecalls/sup/	388	48535460204
+pathogen_raw_pod5	pathogen_surveillance_2025.09/raw/	73	273094430576
+pathogen_basecalls_fastq	pathogen_surveillance_2025.09/basecalls/	17	39479237126

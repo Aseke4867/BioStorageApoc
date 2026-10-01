@@ -1,0 +1,3 @@
+dataset	codec	level	comp_s	decomp_s	comp_rss_MB	decomp_rss_MB	out_bytes	lossless	threads	files	in_bytes	bases	ratio	bits_per_base	comp_MBps	decomp_MBps
+illumina_bin4	zstd-19	19	99.89	0.64	1047.418	13.1562	133883410	True	8	2	965371364	376068933	7.2105	2.8481	9.6643	1508.3928
+illumina_bin4	spring	lossless	10.33	9.85	1743.8789	1717.1602	38277120	True	8	2	965371364	376068933	25.2206	0.8143	93.4532	98.0072

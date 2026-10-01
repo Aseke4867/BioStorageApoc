@@ -1,0 +1,2 @@
+file	file_bytes	reads	signal_samples	sample_rate_hz	median_samples_per_read	raw_int16_bytes	vbz_bits_per_sample	vbz_ratio_vs_int16	reads_sampled_for_basecalling
+signal.pod5	2063741552	54946	2448301876	5000	40380.5	4896603752	6.743421870416441	2.372682639090459	20000

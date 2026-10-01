@@ -1,0 +1,66 @@
+feature	coef	odds_ratio_per_unit
+cat__instrument_model_Illumina Genome Analyzer II	-2.0939	0.1232
+cat__center_name_NISC	2.0721	7.9412
+cat__center_name_GEO	-1.9377	0.144
+cat__center_name_BI	-1.7731	0.1698
+cat__center_name_UMIGS	-1.7608	0.1719
+cat__center_name_other	1.7206	5.5879
+cat__center_name_unknown	1.4349	4.1993
+cat__center_name_Wellcome Sanger Institute;SC	1.3745	3.9531
+cat__instrument_model_Ion Torrent PGM	1.2812	3.601
+cat__library_strategy_ChIP-Seq	-1.2542	0.2853
+cat__center_name_Centre for Genomic Epidemiology;National Food Institute;Technical University of Denmark (DTU);Denmark;DTU-GE	1.1673	3.2132
+cat__center_name_NIID	1.1454	3.1438
+cat__center_name_RIKEN_QBC	1.1299	3.0953
+cat__instrument_model_NextSeq 500	1.0322	2.8072
+cat__instrument_model_Illumina Genome Analyzer	0.9195	2.508
+cat__library_strategy_OTHER	0.8862	2.426
+cat__instrument_model_MinION	0.8476	2.3339
+cat__instrument_model_other	0.8469	2.3323
+cat__center_name_Justus-Liebig-Universitaet Giessen;JUSTUS LIEBIG UNIVERSITAT	0.839	2.3141
+cat__instrument_model_PacBio RS II	-0.8344	0.4342
+cat__instrument_model_Illumina HiScanSQ	-0.8298	0.4361
+cat__library_strategy_WGS	0.8206	2.2719
+cat__center_name_CFSAN	-0.7886	0.4545
+num__share_illumina	0.7306	2.0763
+num__log10_samples	0.6825	1.9788
+cat__library_strategy_AMPLICON	-0.6799	0.5067
+cat__instrument_model_454 GS FLX Titanium	-0.6562	0.5188
+cat__center_name_KYOTO_ENG	-0.5922	0.5531
+cat__center_name_STATENS SERUM INSTITUT	-0.5298	0.5887
+num__share_pacbio	0.5256	1.6914
+cat__library_strategy_POOLCLONE	-0.5004	0.6063
+cat__center_name_THE ROSLIN INSTITUTE	-0.4611	0.6306
+cat__instrument_model_Illumina HiSeq 2500	-0.4569	0.6332
+cat__library_strategy_other	0.441	1.5542
+cat__center_name_Harvard Medical School	-0.4401	0.644
+cat__center_name_JCVI	-0.4273	0.6523
+cat__library_strategy_RNA-Seq	-0.3985	0.6713
+cat__instrument_model_Illumina HiSeq 4000	-0.3871	0.679
+cat__library_strategy_CLONE	0.364	1.4391
+cat__center_name_University Hospital Muenster;IFH_MS	-0.3578	0.6992
+cat__center_name_GIFU_MED	-0.3446	0.7085
+cat__center_name_UC Davis	-0.3396	0.712
+cat__library_source_GENOMIC	-0.3031	0.7385
+cat__library_strategy_WGA	0.2831	1.3272
+cat__center_name_WUGSC	-0.2806	0.7554
+cat__instrument_model_Illumina HiSeq 2000	0.2645	1.3028
+cat__library_source_OTHER	0.263	1.3009
+cat__center_name_JGI	-0.2313	0.7935
+cat__center_name_Wellcome Trust Centre for Human Genetics;WTCHG	-0.2289	0.7954
+num__share_ont	0.2235	1.2504
+cat__instrument_model_Illumina MiSeq	0.22	1.2461
+cat__library_source_METAGENOMIC	-0.2004	0.8184
+cat__center_name_WELLCOME TRUST CENTRE FOR HUMAN GENETICS, UNIVERSITY OF OXFORD	-0.1845	0.8315
+cat__instrument_model_454 GS FLX	-0.1775	0.8374
+num__log10_runs	0.1739	1.1899
+cat__center_name_Rutgers University	-0.1688	0.8447
+num__log10_gb_per_run	-0.1577	0.8541
+cat__library_source_SYNTHETIC	0.1085	1.1146
+cat__library_source_TRANSCRIPTOMIC	0.0938	1.0984
+cat__center_name_UT_COB	-0.0747	0.928
+num__share_paired	-0.0429	0.958
+cat__instrument_model_PacBio RS	-0.0426	0.9583
+cat__instrument_model_Illumina Genome Analyzer IIx	0.0284	1.0288
+num__log10_gb	0.0271	1.0274
+num__year	-0.0263	0.974

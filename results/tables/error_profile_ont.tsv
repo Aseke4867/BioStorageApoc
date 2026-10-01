@@ -1,0 +1,2 @@
+platform	reads_mapped_total	reads_profiled	median_read_len	median_identity	mean_identity	phred_of_error	mismatch_per_100	ins_per_100	del_per_100	indel_share_of_errors	hp_share_of_indel_events	hp_share_of_genome
+ont	41926	20000	11539.5	0.975205082247004	0.9697311564045938	15.190041707093457	1.0558756508530498	0.7298051026326859	1.2412036060548746	0.6511674958691518	0.16512080874689408	0.0592644601534109

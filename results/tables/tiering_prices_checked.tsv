@@ -1,0 +1,6 @@
+tier	kind	usd	aws_description
+hot	storage	0.023	$0.023 per GB - first 50 TB / month of storage used
+warm	storage	0.004	$0.004 per GB-Month of storage used in Glacier Instant Retrieval
+warm	retrieval	0.03	$0.03 per GB - flat fee for all bytes retrieved in Glacier Instant Retrieval
+cold	storage	0.00099	$0.00099 per Gigabyte Month for TimedStorage-INT-DAA-ByteHrs:IntelligentTieringDAAStorage in US East (N. Virginia)
+cold	retrieval	0.0025	$0.0025 per GB Bulk retrieval fee from Glacier Deep Archive in US East (N. Virginia)

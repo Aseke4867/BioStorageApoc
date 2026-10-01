@@ -1,0 +1,18 @@
+2026-10-01 14:29:00,372 NanoPlot 1.48.0 started with arguments Namespace(threads=8, verbose=False, store=False, raw=False, huge=False, outdir='results/qc/nanoplot_ont', no_static=True, prefix='', tsv_stats=True, only_report=False, info_in_report=False, include_js='cdn', maxlength=None, minlength=None, drop_outliers=False, downsample=None, loglength=False, percentqual=False, alength=False, minqual=None, runtime_until=None, readtype='1D', barcoded=False, no_supplementary=False, color='#4CB391', colormap='Greens', format=['png'], plots=['kde', 'dot'], legacy=None, listcolors=False, listcolormaps=False, no_N50=False, N50=False, title=None, font_scale=1, dpi=300, hide_stats=False, fastq=['/home/ravse/biostorage_data/raw/ont.fastq.gz'], fasta=None, fastq_rich=None, fastq_minimal=None, summary=None, bam=None, ubam=None, cram=None, pickle=None, feather=None, path='results/qc/nanoplot_ont/')
+2026-10-01 14:29:00,373 Python version is: 3.11.16 (main, Sep  2 2026, 23:39:52) [GCC 15.3.0]
+2026-10-01 14:29:00,381 Nanoget: Starting to collect statistics from plain fastq file.
+2026-10-01 14:29:00,382 Nanoget: Decompressing gzipped fastq /home/ravse/biostorage_data/raw/ont.fastq.gz
+2026-10-01 14:29:16,314 Reduced DataFrame memory usage from 0.6398658752441406Mb to 0.6398658752441406Mb
+2026-10-01 14:29:16,324 Nanoget: Gathered all metrics of 41926 reads
+2026-10-01 14:29:16,355 Calculated statistics
+2026-10-01 14:29:16,356 Using sequenced read lengths for plotting.
+2026-10-01 14:29:16,357 NanoPlot:  Valid color #4CB391.
+2026-10-01 14:29:16,357 NanoPlot:  Valid colormap Greens.
+2026-10-01 14:29:16,358 NanoPlot:  Creating length plots for Read length.
+2026-10-01 14:29:16,358 NanoPlot:  Using 41926 reads maximum of 87567bp.
+2026-10-01 14:29:16,499 NanoPlot: Creating yield by minimal length plot for Read length.
+2026-10-01 14:29:16,610 Created length plots
+2026-10-01 14:29:16,611 NanoPlot: Creating Read lengths vs Average read quality plots using 41926 reads.
+2026-10-01 14:29:16,693 Created LengthvsQual plot
+2026-10-01 14:29:16,693 Writing html report.
+2026-10-01 14:29:16,702 Finished!

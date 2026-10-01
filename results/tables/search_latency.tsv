@@ -1,0 +1,17 @@
+format	query	median_s	min_s	n_runs	reads_found	recall_vs_bam	extra_vs_bam	p95_s
+BAM	gene	0.0058	0.0053	3	792.0	1.0	0.0	
+CRAM 3.1	gene	0.0145	0.0134	3	792.0	1.0	0.0	
+CRAM 3.1 archive	gene	0.3404	0.3292	3	792.0	1.0	0.0	
+fastq.gz (as archived)	gene	5.2682	5.2567	3	778.0	0.9823	0.0	
+fastq.zst (-19)	gene	5.1994	5.1781	3	778.0	0.9823	0.0	
+spring	gene	15.3867	15.3523	3	778.0	0.9823	0.0	
+BLAST db	gene	0.1484	0.1445	3	770.0	0.9722	0.0	
+BAM	random 1000 bp region	0.0048	0.0036	200				0.0063
+CRAM 3.1	random 1000 bp region	0.0063	0.0058	200				0.0075
+CRAM 3.1 archive	random 1000 bp region	0.0324	0.023	200				0.0368
+BAM	full scan	0.2613	0.2601	3				
+CRAM 3.1	full scan	0.1006	0.0947	3				
+CRAM 3.1 archive	full scan	0.1472	0.147	3				
+fastq.gz (as archived)	full scan	2.5004	2.4695	3				
+fastq.zst (-19)	full scan	0.8336	0.8235	3				
+spring	full scan	10.2356	10.1395	3				

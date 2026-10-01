@@ -1,0 +1,2 @@
+policy	storage_cost_saving_fraction	delayed_share_of_reuse	threshold	basis	how_to_use
+model (logistic): Deep Archive if p<thr, else Instant Retrieval	0.8347	0.169	0.60918	E. coli SRA/ENA studies public 2018-2021, 60-month horizon, AWS us-east-1 list prices	multiply projected archive storage cost by (1 - saving fraction) in the crossover model

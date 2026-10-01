@@ -1,0 +1,6 @@
+issue	rows
+unparsable dates (dropped)	0
+day-to-day decreases in bases (kept: withdrawn or suppressed data)	0
+day-to-day decreases in bytes (kept: withdrawn or suppressed data)	0
+gaps longer than 31 days between reports	1
+monthly rows kept	192
